@@ -1,0 +1,17 @@
+.nav {
+    display: flex;
+    list-style-type: none;
+}
+
+.active {
+    border-bottom: 1px solid green;
+}
+
+li {
+    margin-left: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+}
