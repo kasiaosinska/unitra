@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import AddItem from './components/AddItem';
 import AllProducts from './components/AllProducts';
@@ -8,13 +9,10 @@ import Login from './components/Login';
 import Main from './components/Main';
 import Menu from './containers/Menu';
 
-const authorization = {
-    isAuthorized: false,
-}
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-        authorization.isAuthorized === true
+        this.props.isLoggedIn
             ? <Component {...props} />
             : <Redirect to={{
                 pathname: '/login',
@@ -40,4 +38,10 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLoggedIn: state.auth.isLoggedIn
+    }
+}
+
+export default connect(mapStateToProps)(App);

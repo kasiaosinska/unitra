@@ -1,34 +1,44 @@
 import React, { Component } from 'react';
+import { login } from '../../actions/auth';
+import { connect } from 'react-redux';
 import './style.css';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAuthorized: false,
-            login: '',
+            username: '',
             password: '',
         }
     }
 
-    onSubmit = e => {
+    onChange = e => {
         e.preventDefault();
         this.setState({
-            login: this.state.login,
+            username: this.state.username,
             password: this.state.password,
         })
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+        this.props.onLogin(
+            this.state.username,
+            this.state.password
+        )
     }
 
     render() {
         return (
             <div>
+              <h3>Logowanie</h3>
                 <form className="login" onSubmit={this.onSubmit}>
                     <label>
-                        Login:
-                        <input value={this.state.login} onChange={this.onChange} placeholder="Login" />
+                        Nazwa użytkownika:
+                        <input value={this.state.username} onChange={this.onChange} placeholder="Nazwa użytkownika" />
                     </label>
                     <label>
-                        Password:
+                        Hasło:
                         <input value={this.state.password} onChange={this.onChange} placeholder="Hasło" />
                     </label>
                     <button>Zaloguj</button>
@@ -38,4 +48,16 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        isLoggedIn: state.auth.isLoggedIn
+    };
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogin: (username, password) => { dispatch(login(username, password));}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
