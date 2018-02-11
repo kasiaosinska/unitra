@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { login } from '../../actions/auth';
-import { connect } from 'react-redux';
 import './style.css';
 
 class Login extends Component {
@@ -18,7 +16,7 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password,
         })
-    }
+    };
 
     onSubmit = e => {
         e.preventDefault();
@@ -26,7 +24,7 @@ class Login extends Component {
             this.state.username,
             this.state.password
         )
-    }
+    };
 
     render() {
         return (
@@ -48,16 +46,4 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        isLoggedIn: state.auth.isLoggedIn
-    };
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onLogin: (username, password) => { dispatch(login(username, password));}
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;
