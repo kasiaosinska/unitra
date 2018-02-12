@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './style.css';
+import { observer } from 'mobx-react';
 
-class Login extends Component {
+const Login = observer(class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,9 +28,11 @@ class Login extends Component {
     };
 
     render() {
+        console.log('login', this.props.store.login);
         return (
             <div>
               <h3>Logowanie</h3>
+                <div>{this.props.store.username}</div>
                 <form className="login" onSubmit={this.onSubmit}>
                     <label>
                         Nazwa użytkownika:
@@ -44,6 +47,6 @@ class Login extends Component {
             </div>
         )
     }
-}
+});
 
 export default Login;

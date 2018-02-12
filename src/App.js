@@ -20,11 +20,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
             pathname: '/login',
             state: { from: props.location }
             }} />
-            )} />
+     )} />
 );
 
 class App extends Component {
     render() {
+        // console.log('app', this.props.store.login);
         return (
             <BrowserRouter>
                 <div>
@@ -37,6 +38,6 @@ class App extends Component {
             </BrowserRouter>
         );
     }
-}
+};
 
 export default App;
