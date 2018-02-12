@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 const Login = observer(class Login extends Component {
     constructor(props) {
@@ -49,4 +49,4 @@ const Login = observer(class Login extends Component {
     }
 });
 
-export default Login;
+export default inject('store')(Login);
