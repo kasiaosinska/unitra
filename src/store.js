@@ -3,9 +3,9 @@ import { extendObservable } from 'mobx';
 class LoginStore {
     constructor() {
         extendObservable(this, {
-            login: false,
-            username: 'kasia',
-            password: '12345',
+            isLogged: false,
+            username: 'a',
+            password: 'a',
         })
     }
 }

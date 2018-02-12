@@ -11,36 +11,37 @@ const Login = observer(class Login extends Component {
         }
     }
 
-    onChange = e => {
-        e.preventDefault();
+    handleChange = (e) => {
         this.setState({
-            username: this.state.username,
-            password: this.state.password,
-        })
+            [e.target.name]: e.target.value
+        });
     };
 
-    onSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        this.props.onLogin(
-            this.state.username,
-            this.state.password
-        )
+        if ( String(this.state.username) === this.props.store.username && String(this.state.password) === this.props.store.password) {
+            this.props.store.isLogged = true;
+            this.props.history.push('/additems');
+        }
+        else {
+            this.props.store.isLogged = false;
+        }
+
     };
 
     render() {
-        console.log('login', this.props.store.login);
+        const { username, password } = this.state;
         return (
             <div>
               <h3>Logowanie</h3>
-                <div>{this.props.store.username}</div>
-                <form className="login" onSubmit={this.onSubmit}>
+                <form className="login" onSubmit={this.handleSubmit}>
                     <label>
                         Nazwa użytkownika:
-                        <input value={this.state.username} onChange={this.onChange} placeholder="Nazwa użytkownika" />
+                        <input name="username" type="text" value={username} onChange={this.handleChange} placeholder="Nazwa użytkownika" />
                     </label>
                     <label>
                         Hasło:
-                        <input value={this.state.password} onChange={this.onChange} placeholder="Hasło" />
+                        <input name="password" type="text" value={password} onChange={this.handleChange} placeholder="Hasło" />
                     </label>
                     <button>Zaloguj</button>
                 </form>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
 
 import AddItem from './components/AddItem';
 import AllProducts from './components/AllProducts';
@@ -8,24 +9,19 @@ import Login from './components/Login';
 import Main from './components/Main';
 import Menu from './containers/Menu';
 
-const authorization = {
-    isAuthorized: false,
-};
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={(props) => (
-        authorization.isAuthorized === true
-        ? <Component {...props} />
-            : <Redirect to={{
-            pathname: '/login',
-            state: { from: props.location }
-            }} />
-     )} />
-);
-
-class App extends Component {
+const App = observer(class App extends Component {
     render() {
-        // console.log('app', this.props.store.login);
+        const PrivateRoute = ({ component: Component, ...rest }) => (
+            <Route {...rest} render={(props) => (
+                this.props.store.isLogged
+                    ? <Component {...props} />
+                    : <Redirect to={{
+                        pathname: '/login',
+                        state: { from: props.location }
+                    }} />
+            )} />
+        );
+
         return (
             <BrowserRouter>
                 <div>
@@ -38,6 +34,6 @@ class App extends Component {
             </BrowserRouter>
         );
     }
-};
+});
 
-export default App;
+export default inject('store')(App);
