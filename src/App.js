@@ -29,7 +29,7 @@ const App = observer(class App extends Component {
                     <Route exact path='/' component={Main} />
                     <Route path='/allproducts' component={AllProducts} />
                     <Route path='/login' component={Login} />
-                    <PrivateRoute path='/additems' component={AddItem} />
+                    <PrivateRoute path='/additem' component={AddItem} />
                 </div>
             </BrowserRouter>
         );

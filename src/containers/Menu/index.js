@@ -13,28 +13,29 @@ const Menu = observer(class Menu extends Component {
 
     render() {
         return (
-            <div>
+            <div className="menu-wrapper">
                 <ul className="nav">
-                    <li>
-                        <NavLink exact activeClassName='active' to="/">Home</NavLink>
+                    <li className="menu-element justify-left">UNITRA</li>
+                    <li className="justify-right">
+                        <NavLink className="menu-element" exact activeClassName='active' to="/">Home</NavLink>
                     </li>
-                    <li>
-                        <NavLink activeClassName='active' to="/allproducts">Wszystkie produkty</NavLink>
+                    <li className="justify-right">
+                        <NavLink className="menu-element" activeClassName='active' to="/allproducts">Wszystkie produkty</NavLink>
                     </li>
-                    <li>
-                        <NavLink activeClassName='active' to="/additems">Dodaj produkt</NavLink>
+                    <li className="justify-right">
+                        <NavLink className="menu-element" activeClassName='active' to="/additem">Dodaj Produkt</NavLink>
                     </li>
-                    <li>
+                    <li className="justify-right">
                         {this.props.store.isLogged ?
-                            <NavLink activeClassName='active' to="/">
-                                <button onClick={this.handleLoggedOut}>
+                            <NavLink className="menu-element" activeClassName='active' to="/">
+                                <span onClick={this.handleLoggedOut}>
                                     Wyloguj
-                                </button>
+                                </span>
                             </NavLink> :
-                            <NavLink activeClassName='active' to="/login">
-                                <button>
+                            <NavLink className="menu-element" activeClassName='active' to="/login">
+                                <span>
                                     Zaloguj
-                                </button>
+                                </span>
                             </NavLink>
                         }
                     </li>

@@ -21,7 +21,7 @@ const Login = observer(class Login extends Component {
         e.preventDefault();
         if ( String(this.state.username) === this.props.store.username && String(this.state.password) === this.props.store.password) {
             this.props.store.isLogged = true;
-            this.props.history.push('/additems');
+            this.props.history.push('/additem');
         }
         else {
             this.props.store.isLogged = false;
@@ -32,19 +32,15 @@ const Login = observer(class Login extends Component {
     render() {
         const { username, password } = this.state;
         return (
-            <div>
-              <h3>Logowanie</h3>
-                <form className="login" onSubmit={this.handleSubmit}>
-                    <label>
-                        Nazwa użytkownika:
-                        <input name="username" type="text" value={username} onChange={this.handleChange} placeholder="Nazwa użytkownika" />
-                    </label>
-                    <label>
-                        Hasło:
-                        <input name="password" type="text" value={password} onChange={this.handleChange} placeholder="Hasło" />
-                    </label>
-                    <button>Zaloguj</button>
-                </form>
+            <div className="login-wrapper">
+                <div className="login-box">
+                    <h3>Logowanie</h3>
+                    <form className="login" onSubmit={this.handleSubmit}>
+                        <input name="username" type="text" value={username} onChange={this.handleChange} placeholder="nazwa użytkownika" />
+                        <input name="password" type="text" value={password} onChange={this.handleChange} placeholder="hasło" />
+                        <button className="btn">Zaloguj</button>
+                    </form>
+                </div>
             </div>
         )
     }

@@ -5,9 +5,7 @@ class Main extends Component {
 
     render() {
         return (
-            <div>
-                Główna
-            </div>
+            <div className="box-wrapper" />
         )
     }
 }
