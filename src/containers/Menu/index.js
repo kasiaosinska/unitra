@@ -27,15 +27,15 @@ const Menu = observer(class Menu extends Component {
                     </li>
                     <li className="justify-right">
                         {this.props.store.isLogged ?
-                            <NavLink className="menu-element" activeClassName='active' to="/">
-                                <span onClick={this.handleLoggedOut}>
+                            <NavLink className="menu-element" to="/">
+                                <button className="btn" onClick={this.handleLoggedOut}>
                                     Wyloguj
-                                </span>
+                                </button>
                             </NavLink> :
-                            <NavLink className="menu-element" activeClassName='active' to="/login">
-                                <span>
+                            <NavLink className="menu-element" to="/login">
+                                <button className="btn">
                                     Zaloguj
-                                </span>
+                                </button>
                             </NavLink>
                         }
                     </li>
