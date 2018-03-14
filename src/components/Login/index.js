@@ -19,12 +19,12 @@ const Login = observer(class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if ( String(this.state.username) === this.props.store.username && String(this.state.password) === this.props.store.password) {
-            this.props.store.isLogged = true;
+        if ( String(this.state.username) === this.props.store.loginStore.username && String(this.state.password) === this.props.store.loginStore.password) {
+            this.props.store.loginStore.isLogged = true;
             this.props.history.push('/additem');
         }
         else {
-            this.props.store.isLogged = false;
+            this.props.store.loginStore.isLogged = false;
         }
 
     };

@@ -7,7 +7,7 @@ const Menu = observer(class Menu extends Component {
 
     handleLoggedOut = (e) => {
         e.preventDefault();
-        this.props.store.isLogged = false;
+        this.props.store.loginStore.isLogged = false;
         this.props.history.push('/');
     };
 
@@ -26,7 +26,7 @@ const Menu = observer(class Menu extends Component {
                         <NavLink className="menu-element" activeClassName='active' to="/additem">Dodaj Produkt</NavLink>
                     </li>
                     <li className="justify-right">
-                        {this.props.store.isLogged ?
+                        {this.props.store.loginStore.isLogged ?
                             <NavLink className="menu-element" to="/">
                                 <button className="btn btn-danger" onClick={this.handleLoggedOut}>
                                     Wyloguj

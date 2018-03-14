@@ -53,6 +53,10 @@ class AddItem extends Component {
                     <label>Stan</label>
                     <input type="text" className="form-control" id="itemCondition" value={this.state.condition} onChange={this.onChange} placeholder="Stan" />
                 </div>
+                <div className="form-group">
+                <label>Dodaj zdjęcie</label>
+                    <input type="file" className="form-control-file" id="image" />
+                </div>
                 <button className="btn btn-danger">Zapisz</button>
             </form>
 

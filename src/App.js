@@ -13,7 +13,7 @@ const App = observer(class App extends Component {
     render() {
         const PrivateRoute = ({ component: Component, ...rest }) => (
             <Route {...rest} render={(props) => (
-                this.props.store.isLogged
+                this.props.store.loginStore.isLogged
                     ? <Component {...props} />
                     : <Redirect to={{
                         pathname: '/login',
