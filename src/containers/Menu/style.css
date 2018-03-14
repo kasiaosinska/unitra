@@ -6,30 +6,12 @@
     align-items: center;
     list-style-type: none;
     margin: 0;
-    padding-right: 40px;
+    padding: 0 40px;
     height: 100%; }
     .menu-wrapper .nav .menu-element {
       font-size: 18px;
       color: gainsboro;
       text-decoration: none; }
-      .menu-wrapper .nav .menu-element .btn {
-        border: 2px solid transparent;
-        background: #d5100a;
-        color: #ffffff;
-        font-size: 18px;
-        line-height: 18px;
-        padding: 5px 0;
-        text-decoration: none;
-        text-shadow: none;
-        border-radius: 5px;
-        box-shadow: none;
-        transition: 0.25s;
-        display: block;
-        width: 90px;
-        cursor: pointer;
-        outline: none; }
-      .menu-wrapper .nav .menu-element .btn:hover {
-        background-color: #a20c0b; }
     .menu-wrapper .nav .justify-left {
       margin-right: auto; }
     .menu-wrapper .nav .justify-right {

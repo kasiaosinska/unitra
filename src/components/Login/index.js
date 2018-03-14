@@ -38,7 +38,7 @@ const Login = observer(class Login extends Component {
                     <form className="login" onSubmit={this.handleSubmit}>
                         <input name="username" type="text" value={username} onChange={this.handleChange} placeholder="nazwa użytkownika" />
                         <input name="password" type="text" value={password} onChange={this.handleChange} placeholder="hasło" />
-                        <button className="btn">Zaloguj</button>
+                        <button type="submit" className="btn btn-danger">Zaloguj</button>
                     </form>
                 </div>
             </div>

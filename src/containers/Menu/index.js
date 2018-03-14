@@ -28,12 +28,12 @@ const Menu = observer(class Menu extends Component {
                     <li className="justify-right">
                         {this.props.store.isLogged ?
                             <NavLink className="menu-element" to="/">
-                                <button className="btn" onClick={this.handleLoggedOut}>
+                                <button className="btn btn-danger" onClick={this.handleLoggedOut}>
                                     Wyloguj
                                 </button>
                             </NavLink> :
                             <NavLink className="menu-element" to="/login">
-                                <button className="btn">
+                                <button className="btn btn-danger">
                                     Zaloguj
                                 </button>
                             </NavLink>

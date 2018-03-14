@@ -31,24 +31,31 @@ class AddItem extends Component {
 
         return (
             <form className="entryForm" onSubmit={this.onSubmit}>
-                <label>
-                    Kategoria:
-                    <input value={this.state.category} onChange={this.onChange} placeholder="Kategoria" />
-                </label>
-                <label>
-                    Nazwa:
-                    <input value={this.state.name} onChange={this.onChange} placeholder="Nazwa" />
-                </label>
-                <label>
-                    Opis:
-                    <input value={this.state.description} onChange={this.onChange} placeholder="Opis" />
-                </label>
-                <label>
-                    Stan:
-                    <input value={this.state.condition} onChange={this.onChange} placeholder="Stan" />
-                </label>
-                <button>Zapisz</button>
+                <div className="form-group">
+                    <label>Kategoria</label>
+                    <select id="inputState" className="form-control" value={this.state.category} onChange={this.onChange}>
+                        <option selected>Wybierz</option>
+                        <option>Kategoria1</option>
+                        <option>Kategoria2</option>
+                        <option>Kategoria3</option>
+                        <option>Kategoria4</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label>Nazwa</label>
+                    <input type="text" className="form-control" id="itemName" value={this.state.name} onChange={this.onChange} placeholder="Nazwa" />
+                </div>
+                <div className="form-group">
+                    <label>Opis</label>
+                    <input type="text" className="form-control" id="itemDescription" value={this.state.name} onChange={this.onChange} placeholder="Opis" />
+                </div>
+                <div className="form-group">
+                    <label>Stan</label>
+                    <input type="text" className="form-control" id="itemCondition" value={this.state.condition} onChange={this.onChange} placeholder="Stan" />
+                </div>
+                <button className="btn btn-danger">Zapisz</button>
             </form>
+
         )
     }
 }

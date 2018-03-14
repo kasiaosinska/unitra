@@ -1,7 +1,7 @@
 .login-wrapper {
   background-color: #ecf0f1;
   padding: 50px;
-  height: calc(100vh - 150px); }
+  height: calc(100vh - 50px); }
   .login-wrapper .login-box {
     margin: 20px auto;
     padding: 25px;
@@ -30,22 +30,3 @@
       .login-wrapper .login-box .login input:focus {
         border: 2px solid #a20c0b;
         box-shadow: none; }
-      .login-wrapper .login-box .login .btn {
-        border: 2px solid transparent;
-        background: #d5100a;
-        color: #ffffff;
-        font-size: 16px;
-        line-height: 25px;
-        padding: 10px 0;
-        text-decoration: none;
-        text-shadow: none;
-        border-radius: 3px;
-        box-shadow: none;
-        transition: 0.25s;
-        display: block;
-        width: 250px;
-        margin: 30px auto;
-        cursor: pointer;
-        font-family: 'Roboto', sans-serif; }
-      .login-wrapper .login-box .login .btn:hover {
-        background-color: #a20c0b; }
