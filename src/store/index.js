@@ -1,11 +1,10 @@
 import { extendObservable } from 'mobx';
+import { Fb } from '../firebase/firebaseStore';
 
 class LoginStore {
     constructor() {
         extendObservable(this, {
             isLogged: false,
-            username: 'a',
-            password: 'a',
         })
     }
 }

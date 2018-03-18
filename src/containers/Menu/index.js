@@ -2,16 +2,26 @@ import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import './style.css';
 import { observer, inject } from 'mobx-react';
+import firebase from 'firebase';
 
 const Menu = observer(class Menu extends Component {
 
     handleLoggedOut = (e) => {
         e.preventDefault();
-        this.props.store.loginStore.isLogged = false;
-        this.props.history.push('/');
+        firebase.auth().signOut();
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+            if(!firebaseUser) {
+                this.props.store.loginStore.isLogged = false;
+                this.props.history.push('/');
+            }
+            else {
+                this.props.store.loginStore.isLogged = true;
+            }
+        });
     };
 
     render() {
+        console.log('aaa', this.props.store.loginStore.isLogged)
         return (
             <div className="menu-wrapper">
                 <ul className="nav">
