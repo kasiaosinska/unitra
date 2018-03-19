@@ -12,13 +12,3 @@ const config = {
 if (!firebase.apps.length) {
     firebase.initializeApp(config);
 }
-
-const login = firebase.database().ref('loginStore');
-const items = firebase.database().ref('itemsStore');
-
-const Fb = {
-    login,
-    items
-};
-
-export {Fb};

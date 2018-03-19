@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import './style.css';
 import { observer, inject } from 'mobx-react';
 import firebase from 'firebase';
+import { doSignInWithEmailAndPassword } from '../../firebase/auth'
+
+const initiaState = {
+  email: '',
+  password: '',
+}
 
 const Login = observer(class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-        }
-    }
+
+   state = { ...initiaState };
+
 
     handleChange = (e) => {
         this.setState({
@@ -20,34 +22,38 @@ const Login = observer(class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const email = this.state.email;
-        const pass = this.state.password;
-        const auth = firebase.auth();
-        const promise = auth.signInWithEmailAndPassword(email, pass);
-        promise.catch(e => console.log(e.message));
-
-        firebase.auth().onAuthStateChanged(firebaseUser => {
-            if(firebaseUser) {
+        const { email, password } = this.state;
+        doSignInWithEmailAndPassword(email, password)
+          .then(
+            firebase.auth().onAuthStateChanged(firebaseUser => {
+              console.log('firebase:', firebaseUser);
+              if(firebaseUser) {
                 this.props.store.loginStore.isLogged = true;
                 this.props.history.push('/additem');
-            }
-            else {
+              }
+              else {
                 this.props.store.loginStore.isLogged = false;
-            }
-        })
+              }
+            })
+          )
+          .catch(e => console.log(e.message));
 
     };
 
     render() {
         const { email, password } = this.state;
-        return (
+        const isInvalid = email === '' || password === '';
+        console.log('email:', email)
+        console.log('password:', password)
+
+      return (
             <div className="login-wrapper">
                 <div className="login-box">
                     <h3>Logowanie</h3>
                     <form className="login" onSubmit={this.handleSubmit}>
                         <input name="email" type="text" value={email} onChange={this.handleChange} placeholder="e-mail" />
                         <input name="password" type="text" value={password} onChange={this.handleChange} placeholder="hasło" />
-                        <button type="submit" className="btn btn-danger">Zaloguj</button>
+                        <button type="submit" disabled={isInvalid} className="btn btn-danger">Zaloguj</button>
                     </form>
                 </div>
             </div>

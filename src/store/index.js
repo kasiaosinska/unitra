@@ -1,5 +1,4 @@
 import { extendObservable } from 'mobx';
-import { Fb } from '../firebase/firebaseStore';
 
 class LoginStore {
     constructor() {
