@@ -7,22 +7,28 @@ import firebase from 'firebase';
 
 const Menu = observer(class Menu extends Component {
 
+    state = {
+        authUser: null
+    };
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+            if (!firebaseUser) {
+                this.setState({authUser: false});
+            }
+            else {
+                this.setState({authUser: true});
+            }
+        })
+    }
+
     handleLoggedOut = (e) => {
         e.preventDefault();
         auth.doSignOut();
-        firebase.auth().onAuthStateChanged(firebaseUser => {
-            if(!firebaseUser) {
-                this.props.store.loginStore.isLogged = false;
-                this.props.history.push('/');
-            }
-            else {
-                this.props.store.loginStore.isLogged = true;
-            }
-        });
+        this.state.authUser === false ? this.props.history.push('/') : null;
     };
 
     render() {
-        console.log('isLogged', this.props.store.loginStore.isLogged)
         return (
             <div className="menu-wrapper">
                 <ul className="nav">
@@ -37,7 +43,7 @@ const Menu = observer(class Menu extends Component {
                         <NavLink className="menu-element" activeClassName='active' to="/additem">Dodaj Produkt</NavLink>
                     </li>
                     <li className="justify-right">
-                        {this.props.store.loginStore.isLogged ?
+                        {this.state.authUser ?
                             <NavLink className="menu-element" to="/">
                                 <button className="btn btn-danger" onClick={this.handleLoggedOut}>
                                     Wyloguj

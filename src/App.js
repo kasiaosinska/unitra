@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
+import firebase from 'firebase';
 
 import AddItem from './components/AddItem';
 import AllProducts from './components/AllProducts';
@@ -10,10 +11,26 @@ import Main from './components/Main';
 import Menu from './containers/Menu';
 
 const App = observer(class App extends Component {
+
+    state = {
+        authUser: null
+    };
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                this.setState({authUser: true})
+            }
+            else {
+                this.setState({authUser: false})
+            }
+        })
+    }
+
     render() {
         const PrivateRoute = ({ component: Component, ...rest }) => (
             <Route {...rest} render={(props) => (
-                this.props.store.loginStore.isLogged
+                this.state.authUser
                     ? <Component {...props} />
                     : <Redirect to={{
                         pathname: '/login',
