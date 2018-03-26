@@ -8,13 +8,14 @@ import firebase from 'firebase';
 const Menu = observer(class Menu extends Component {
 
     state = {
-        authUser: null
+        authUser: false,
     };
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(firebaseUser => {
             if (!firebaseUser) {
                 this.setState({authUser: false});
+                this.props.history.push('/');
             }
             else {
                 this.setState({authUser: true});
@@ -25,7 +26,6 @@ const Menu = observer(class Menu extends Component {
     handleLoggedOut = (e) => {
         e.preventDefault();
         auth.doSignOut();
-        this.state.authUser === false ? this.props.history.push('/') : null;
     };
 
     render() {

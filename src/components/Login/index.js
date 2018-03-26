@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import './style.css';
 import { observer, inject } from 'mobx-react';
-import { doSignInWithEmailAndPassword } from '../../firebase/auth'
+import { doSignInWithEmailAndPassword } from '../../firebase/auth';
+import firebase from 'firebase';
 
 const initiaState = {
   email: '',
   password: '',
-}
+};
 
 const Login = observer(class Login extends Component {
 
-   state = { ...initiaState };
+    state = { ...initiaState };
 
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                this.props.history.push('/additem');
+            }
+        })
+    }
 
     handleChange = (e) => {
         this.setState({
@@ -23,13 +31,12 @@ const Login = observer(class Login extends Component {
         e.preventDefault();
         const { email, password } = this.state;
         doSignInWithEmailAndPassword(email, password);
-        this.props.history.push('/additem');
     };
 
     render() {
         const { email, password } = this.state;
         const isInvalid = email === '' || password === '';
-      return (
+        return (
             <div className="login-wrapper">
                 <div className="login-box">
                     <h3>Logowanie</h3>
