@@ -18,10 +18,11 @@ class AddItem extends Component {
     }
 
     onSubmit = e => {
-        e.preventDefault();
+        e.preventDefault()
         this.setState({
             category: this.state.category,
             name: this.state.name,
+            img: this.state.img,
             description: this.state.description,
             condition: this.state.condition
         })
