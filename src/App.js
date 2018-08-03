@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import { inject, observer } from 'mobx-react';
+import { connect } from 'react-redux'
 import firebase from 'firebase';
 
 import AddItem from './components/AddItem';
@@ -10,7 +10,7 @@ import Login from './components/Login';
 import Main from './components/Main';
 import Menu from './containers/Menu';
 
-const App = observer(class App extends Component {
+class App extends Component {
 
     state = {
         authUser: null
@@ -51,6 +51,6 @@ const App = observer(class App extends Component {
             </BrowserRouter>
         );
     }
-});
+}
 
-export default inject('store')(App);
+export default connect()(App);

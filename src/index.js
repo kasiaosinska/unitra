@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import store from './store/index';
-import { Provider } from 'mobx-react';
+import store from './store';
+import { Provider } from 'react-redux';
 
 const app = (
     <Provider store={store}>

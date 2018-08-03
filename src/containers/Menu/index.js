@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import './style.css';
-import { observer, inject } from 'mobx-react';
+import { connect } from 'react-redux';
 import { auth } from '../../firebase';
 import firebase from 'firebase';
 
-const Menu = observer(class Menu extends Component {
+class Menu extends Component {
 
     state = {
         authUser: false,
@@ -60,7 +60,7 @@ const Menu = observer(class Menu extends Component {
             </div>
         )
     }
-});
+}
 
-export default withRouter(inject('store')(Menu));
+export default withRouter(connect()(Menu));
 
