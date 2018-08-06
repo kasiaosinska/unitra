@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './style.css';
+import { Container } from './styled'
 
 class Main extends Component {
 
     render() {
         return (
-            <div className="box-wrapper" />
+            <Container />
         )
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style.css';
+import { Container, Box, Input, Button, Title, Form, Select } from '../../styled'
 import { connect } from 'react-redux';
 import { addItem } from '../../store/actions/addItem'
 
@@ -24,35 +24,25 @@ class AddItem extends Component {
 
   render() {
     return (
-      <form className="entryForm" onSubmit={this.onSubmit}>
-        <div className="form-group">
-          <label>Kategoria</label>
-          <select name="category" className="form-control" value={this.state.category} onChange={this.onChange}>
-            <option selected>Wybierz</option>
-            <option>Kategoria1</option>
-            <option>Kategoria2</option>
-            <option>Kategoria3</option>
-            <option>Kategoria4</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Nazwa</label>
-          <input type="text" className="form-control" name="name" value={this.state.name} onChange={this.onChange} placeholder="Nazwa" />
-        </div>
-        <div className="form-group">
-          <label>Opis</label>
-          <input type="text" className="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="Opis" />
-        </div>
-        <div className="form-group">
-          <label>Stan</label>
-          <input type="text" className="form-control" name="condition" value={this.state.condition} onChange={this.onChange} placeholder="Stan" />
-        </div>
-        <div className="form-group">
-        <label>Dodaj zdjęcie</label>
-          <input type="file" className="form-control-file" name="image" />
-        </div>
-        <button className="btn btn-danger">Zapisz</button>
-      </form>
+      <Container>
+        <Box size='70%'>
+          <Title>Dodaj przedmiot</Title>
+          <Form onSubmit={this.onSubmit}>
+            <Select name="category" value={this.state.category} onChange={this.onChange} placeholder="Kategoria">
+              <option selected value='0'>Wybierz</option>
+              <option>Kategoria1</option>
+              <option>Kategoria2</option>
+              <option>Kategoria3</option>
+              <option>Kategoria4</option>
+            </Select>
+            <Input type="text" name="name" value={this.state.name} onChange={this.onChange} placeholder="Nazwa" />
+            <Input type="text" name="description" value={this.state.description} onChange={this.onChange} placeholder="Opis" />
+            <Input type="text" name="condition" value={this.state.condition} onChange={this.onChange} placeholder="Stan" />
+            <Input type="file" name="image" placeholder="Dodaj zdjęcie"/>
+            <Button>Zapisz</Button>
+          </Form>
+        </Box>
+      </Container>
     )
   }
 }

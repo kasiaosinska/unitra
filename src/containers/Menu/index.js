@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import './style.css';
+import { Button } from '../../styled'
+import { Container, MenuList, ElementOnTheRight, ElementOnTheLeft } from './styled'
 import { connect } from 'react-redux';
 import { auth } from '../../firebase';
 import firebase from 'firebase';
@@ -30,34 +31,34 @@ class Menu extends Component {
 
     render() {
         return (
-            <div className="menu-wrapper">
-                <ul className="nav">
-                    <li className="menu-element justify-left">UNITRA</li>
-                    <li className="justify-right">
-                        <NavLink className="menu-element" exact activeClassName='active' to="/">Home</NavLink>
-                    </li>
-                    <li className="justify-right">
-                        <NavLink className="menu-element" activeClassName='active' to="/allproducts">Wszystkie produkty</NavLink>
-                    </li>
-                    <li className="justify-right">
-                        <NavLink className="menu-element" activeClassName='active' to="/additem">Dodaj Produkt</NavLink>
-                    </li>
-                    <li className="justify-right">
+            <Container>
+                <MenuList>
+                    <ElementOnTheLeft>UNITRA</ElementOnTheLeft>
+                    <ElementOnTheRight>
+                        <NavLink exact activeClassName='active' to="/">Home</NavLink>
+                    </ElementOnTheRight>
+                    <ElementOnTheRight>
+                        <NavLink activeClassName='active' to="/allproducts">Wszystkie produkty</NavLink>
+                    </ElementOnTheRight>
+                    <ElementOnTheRight>
+                        <NavLink activeClassName='active' to="/additem">Dodaj Produkt</NavLink>
+                    </ElementOnTheRight>
+                    <ElementOnTheRight>
                         {this.state.authUser ?
-                            <NavLink className="menu-element" to="/">
-                                <button className="btn btn-danger" onClick={this.handleLoggedOut}>
+                            <NavLink to="/">
+                                <Button onClick={this.handleLoggedOut}>
                                     Wyloguj
-                                </button>
+                                </Button>
                             </NavLink> :
-                            <NavLink className="menu-element" to="/login">
-                                <button className="btn btn-danger">
+                            <NavLink to="/login">
+                                <Button>
                                     Zaloguj
-                                </button>
+                                </Button>
                             </NavLink>
                         }
-                    </li>
-                </ul>
-            </div>
+                    </ElementOnTheRight>
+                </MenuList>
+            </Container>
         )
     }
 }
