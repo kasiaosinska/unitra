@@ -12,3 +12,6 @@ const config = {
 if (!firebase.apps.length) {
     firebase.initializeApp(config);
 }
+
+const databaseRef = firebase.database().ref();
+export const itemsRef = databaseRef.child("items");

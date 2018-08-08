@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { Container, Box, Input, Button, Title, Form, Select } from '../../styled'
 import { connect } from 'react-redux';
-import { addItem } from '../../store/actions/addItem'
+import { addItem } from '../../store/actions'
 
 class AddItem extends Component {
   state = {
     category: '',
     name: '',
-    img: '',
+    year: '',
+    number: '',
     description: '',
-    condition: ''
+    img: '',
   }
 
   onChange = e => {
@@ -19,7 +20,6 @@ class AddItem extends Component {
   onSubmit = e => {
     e.preventDefault()
     this.props.addItem({...this.state})
-
   }
 
   render() {
@@ -30,14 +30,23 @@ class AddItem extends Component {
           <Form onSubmit={this.onSubmit}>
             <Select name="category" value={this.state.category} onChange={this.onChange} placeholder="Kategoria">
               <option selected value='0'>Wybierz</option>
-              <option>Kategoria1</option>
-              <option>Kategoria2</option>
-              <option>Kategoria3</option>
-              <option>Kategoria4</option>
+              <option>Amplituner</option>
+              <option>Gramofon</option>
+              <option>Magnetofon</option>
+              <option>Odtwarzacz CD</option>
+              <option>Radiomagnetofon</option>
+              <option>Radio przenośne</option>
+              <option>Radio stołowe</option>
+              <option>Tuner</option>
+              <option>Wzmacniacz</option>
+              <option>Zestawy głośnikowy</option>
+              <option>Zestawy wieżowy</option>
+              <option>Inne</option>
             </Select>
             <Input type="text" name="name" value={this.state.name} onChange={this.onChange} placeholder="Nazwa" />
+            <Input type="text" name="year" value={this.state.year} onChange={this.onChange} placeholder="Rok produkcji" />
+            <Input type="text" name="number" value={this.state.number} onChange={this.onChange} placeholder="Numer seryjny" />
             <Input type="text" name="description" value={this.state.description} onChange={this.onChange} placeholder="Opis" />
-            <Input type="text" name="condition" value={this.state.condition} onChange={this.onChange} placeholder="Stan" />
             <Input type="file" name="image" placeholder="Dodaj zdjęcie"/>
             <Button>Zapisz</Button>
           </Form>

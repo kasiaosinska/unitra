@@ -1,4 +1,4 @@
-import { ADD_ITEM } from '../actions/addItem'
+import { ADD_ITEM } from '../actions/index'
 
 const initialState = {
   items: [],

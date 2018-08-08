@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux'
 import firebase from 'firebase';
 
 import AddItem from './components/AddItem';
@@ -52,4 +51,4 @@ class App extends Component {
     }
 }
 
-export default connect()(App);
+export default App;
