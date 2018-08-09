@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems } from '../../store/actions/index'
+import { fetchItems } from '../../store/actions/index';
 
 import Item from '../../containers/Item';
 
 export class AllProducts extends Component {
 
   componentWillMount() {
-    console.log('aaa', this.props.fetchItems())
     this.props.fetchItems()
   }
 
   render() {
-    console.log('data', this.props.data)
+    const { data } = this.props
+
     return (
       <div>
-        {this.props.data && this.props.data.map((item, index) =>
+        {data && Object.keys(data.items).length > 0 && Object.values(data.items).map((item, index) =>
           <Item
             key={index}
             category={item.category}
             name={item.name}
-            descripton={item.description}
-            url={item.url}
+            year={item.year}
+            number={item.number}
+            description={item.description}
+            url={item.img}
           />
         )}
       </div>
@@ -29,7 +31,7 @@ export class AllProducts extends Component {
   }
 }
 
-const mapStateToProps = ({ data }) => data
+const mapStateToProps = ({ items }) => ({ data: items })
 
 const mapDispatchToProps = dispatch => ({
   fetchItems: () => dispatch(fetchItems()),

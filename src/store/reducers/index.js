@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
-import addItem from './addItem'
-import fetchItems from './fetchItems'
+import items from './items'
 
 export default combineReducers({
-  addItem,
-  fetchItems,
+  items,
 })

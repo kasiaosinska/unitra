@@ -12,7 +12,6 @@ export const removeItem = itemToRemove => async dispatch => {
 
 export const fetchItems = () => async dispatch => {
   itemsRef.on('value', snapshot => {
-    console.log('snapshot.val()', snapshot.val())
     dispatch({
       type: FETCH_ITEMS,
       payload: snapshot.val(),
