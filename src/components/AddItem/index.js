@@ -20,6 +20,14 @@ class AddItem extends Component {
   onSubmit = e => {
     e.preventDefault()
     this.props.addItem({...this.state})
+    this.setState({
+      category: '',
+      name: '',
+      year: '',
+      number: '',
+      description: '',
+      img: '',
+    })
   }
 
   render() {

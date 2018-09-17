@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchItems } from '../../store/actions/index';
+import { fetchItems, removeItem } from '../../store/actions/index';
 
 import Item from '../../containers/Item';
 
@@ -10,20 +10,25 @@ export class AllProducts extends Component {
     this.props.fetchItems()
   }
 
+  handleRemoveItem = item => {
+    this.props.removeItem(item)
+  }
+
   render() {
     const { data } = this.props
 
     return (
       <div>
-        {data && Object.keys(data.items).length > 0 && Object.values(data.items).map((item, index) =>
+        {data && Object.keys(data.items).length > 0 && Object.keys(data.items).map((item, index) =>
           <Item
             key={index}
-            category={item.category}
-            name={item.name}
-            year={item.year}
-            number={item.number}
-            description={item.description}
-            url={item.img}
+            category={data.items[item].category}
+            name={data.items[item].name}
+            year={data.items[item].year}
+            number={data.items[item].number}
+            description={data.items[item].description}
+            url={data.items[item].img}
+            removeItem={() => this.handleRemoveItem(item)}
           />
         )}
       </div>
@@ -35,6 +40,7 @@ const mapStateToProps = ({ items }) => ({ data: items })
 
 const mapDispatchToProps = dispatch => ({
   fetchItems: () => dispatch(fetchItems()),
+  removeItem: item => dispatch(removeItem(item))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts);
