@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { Container } from './styled'
+import { Container } from './styled';
 
 class Main extends Component {
-
-    render() {
-        return (
-            <Container />
-        )
-    }
+  render() {
+    return <Container />;
+  }
 }
 
-export default Main
+export default Main;

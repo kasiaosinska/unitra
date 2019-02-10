@@ -21,15 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea/*
-
-
-l: katarzynabosinska@gmail.com
-h: 123456
-
-To Be Done:
-Add new item to database
-Get items from database and put it to the store
-
-Done:
-Routing
-Login
+info

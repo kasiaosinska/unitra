@@ -7,5 +7,4 @@ export const doSignInWithEmailAndPassword = (email, password) =>
 
 // Log out
 
-export const doSignOut = () =>
-  firebase.auth().signOut();
+export const doSignOut = () => firebase.auth().signOut();
