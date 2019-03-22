@@ -8,6 +8,7 @@ const Item = ({
   description,
   url,
   removeItem,
+  isAdmin,
 }) => {
   return (
     <div>
@@ -17,7 +18,7 @@ const Item = ({
       <p>{year}</p>
       <p>{number}</p>
       <p>{description}</p>
-      <button onClick={removeItem}>usuń</button>
+      {isAdmin && <button onClick={removeItem}>usuń</button>}
     </div>
   );
 };
