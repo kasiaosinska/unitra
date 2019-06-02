@@ -1,65 +1,61 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Box, Title, Form, Input, Button } from '../../styled';
-import { connect } from 'react-redux';
 import { doSignInWithEmailAndPassword } from '../../firebase/auth';
 import firebase from 'firebase';
 
-class Login extends Component {
-  state = {
-    email: '',
-    password: '',
-  };
+const Login = (props) => {
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
 
-  componentDidMount() {
+  useEffect(() => {
     firebase.auth().onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        this.props.history.push('/additem');
+        props.history.push('/additem');
       }
     });
-  }
+  });
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
+  const handleChangeEmail = e => {
+    setEmail(e.target.value)
   };
 
-  handleSubmit = e => {
+  const handleChangePassword = e => {
+    setPassword(e.target.value)
+  };
+
+
+  const handleSubmit = e => {
     e.preventDefault();
-    const { email, password } = this.state;
     doSignInWithEmailAndPassword(email, password);
   };
 
-  render() {
-    const { email, password } = this.state;
-    const isInvalid = email === '' || password === '';
-    return (
-      <Container>
-        <Box size="300px">
-          <Title>Logowanie</Title>
-          <Form onSubmit={this.handleSubmit}>
-            <Input
-              name="email"
-              type="text"
-              value={email}
-              onChange={this.handleChange}
-              placeholder="e-mail"
-            />
-            <Input
-              name="password"
-              type="text"
-              value={password}
-              onChange={this.handleChange}
-              placeholder="hasło"
-            />
-            <Button type="submit" disabled={isInvalid}>
-              Zaloguj
-            </Button>
-          </Form>
-        </Box>
-      </Container>
-    );
-  }
-}
+  const isInvalid = email === '' || password === '';
+  return (
+    <Container>
+      <Box size="300px">
+        <Title>Logowanie</Title>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            name="email"
+            type="text"
+            value={email}
+            onChange={handleChangeEmail}
+            placeholder="e-mail"
+          />
+          <Input
+            name="password"
+            type="text"
+            value={password}
+            onChange={handleChangePassword}
+            placeholder="hasło"
+          />
+          <Button type="submit" disabled={isInvalid}>
+            Zaloguj
+          </Button>
+        </Form>
+      </Box>
+    </Container>
+  );
+};
 
-export default connect()(Login);
+export default Login;

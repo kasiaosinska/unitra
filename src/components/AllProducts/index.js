@@ -1,41 +1,42 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchItems, removeItem } from '../../store/actions/index';
 
 import Item from '../../containers/Item';
+import Spinner from "../../common/Spinner";
 
-export class AllProducts extends Component {
-  componentWillMount() {
-    this.props.fetchItems();
-  }
+const AllProducts = (props) => {
 
-  handleRemoveItem = item => {
+  useEffect(() => {
+    props.fetchItems()
+  });
+
+  const handleRemoveItem = item => {
     this.props.removeItem(item);
   };
 
-  render() {
-    const { data } = this.props;
+  const { data } = props;
 
-    return (
-      <div>
-        {data &&
-          Object.keys(data.items).length > 0 &&
-          Object.keys(data.items).map((item, index) => (
-            <Item
-              key={index}
-              category={data.items[item].category}
-              name={data.items[item].name}
-              year={data.items[item].year}
-              number={data.items[item].number}
-              description={data.items[item].description}
-              url={data.items[item].img}
-              removeItem={() => this.handleRemoveItem(item)}
-            />
-          ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {data && Object.keys(data.items).length > 0 ?
+        Object.keys(data.items).map((item, index) => (
+          <Item
+            key={index}
+            category={data.items[item].category}
+            name={data.items[item].name}
+            year={data.items[item].year}
+            number={data.items[item].number}
+            description={data.items[item].description}
+            url={data.items[item].img}
+            removeItem={() => handleRemoveItem(item)}
+          />
+        )) :
+        <Spinner />
+      }
+    </div>
+  );
+};
 
 const mapStateToProps = ({ items }) => ({ data: items });
 

@@ -50,7 +50,7 @@ class AddItem extends Component {
               onChange={this.onChange}
               placeholder="Kategoria"
             >
-              <option selected value="0">
+              <option>
                 Wybierz
               </option>
               <option>Amplituner</option>
