@@ -6,6 +6,7 @@ export const Container = styled.div`
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+  z-index: 5;
 `;
 
 export const MenuList = styled.ul`

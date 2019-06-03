@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { fetchItems, removeItem } from '../../store/actions/index';
 
 import Item from '../../containers/Item';
-import Spinner from "../../common/Spinner";
+import Spinner from '../../common/Spinner';
+import { CardsWrapper } from './styled.js';
 
-const AllProducts = (props) => {
-
+const AllProducts = props => {
   useEffect(() => {
-    props.fetchItems()
+    props.fetchItems();
   });
 
   const handleRemoveItem = item => {
@@ -18,8 +18,8 @@ const AllProducts = (props) => {
   const { data } = props;
 
   return (
-    <div>
-      {data && Object.keys(data.items).length > 0 ?
+    <CardsWrapper>
+      {data && Object.keys(data.items).length > 0 ? (
         Object.keys(data.items).map((item, index) => (
           <Item
             key={index}
@@ -31,10 +31,11 @@ const AllProducts = (props) => {
             url={data.items[item].img}
             removeItem={() => handleRemoveItem(item)}
           />
-        )) :
+        ))
+      ) : (
         <Spinner />
-      }
-    </div>
+      )}
+    </CardsWrapper>
   );
 };
 
