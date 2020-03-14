@@ -28,6 +28,7 @@ class AddItem extends Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.addItem({ ...this.state });
+
     this.setState({
       category: '',
       name: '',
@@ -50,9 +51,7 @@ class AddItem extends Component {
               onChange={this.onChange}
               placeholder="Kategoria"
             >
-              <option>
-                Wybierz
-              </option>
+              <option>Wybierz</option>
               <option>Amplituner</option>
               <option>Gramofon</option>
               <option>Magnetofon</option>

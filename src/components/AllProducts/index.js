@@ -19,7 +19,7 @@ const AllProducts = props => {
 
   return (
     <CardsWrapper>
-      {data && Object.keys(data.items).length > 0 ? (
+      {data && data.length > 0 && Object.keys(data.items).length > 0 ? (
         Object.keys(data.items).map((item, index) => (
           <Item
             key={index}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Button } from '../../styled';
 import {
@@ -8,65 +8,60 @@ import {
   ElementOnTheLeft,
 } from './styled';
 import { connect } from 'react-redux';
-import { auth } from '../../firebase';
-import firebase from 'firebase';
+import { removeUserSession } from '../../utils/common';
+import { isUserLogged } from '../../store/actions';
 
-class Menu extends Component {
-  state = {
-    authUser: false,
-  };
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-      if (!firebaseUser) {
-        this.setState({ authUser: false });
-        this.props.history.push('/');
-      } else {
-        this.setState({ authUser: true });
-      }
-    });
-  }
-
-  handleLoggedOut = e => {
+const Menu = props => {
+  const handleLoggedOut = e => {
     e.preventDefault();
-    auth.doSignOut();
+    removeUserSession();
+    props.isUserLogged(false);
   };
 
-  render() {
-    return (
-      <Container>
-        <MenuList>
-          <ElementOnTheLeft>UNITRA</ElementOnTheLeft>
-          <ElementOnTheRight>
-            <NavLink exact activeClassName="active" to="/">
-              Home
+  return (
+    <Container>
+      <MenuList>
+        <ElementOnTheLeft>UNITRA</ElementOnTheLeft>
+        <ElementOnTheRight>
+          <NavLink exact activeClassName="active" to="/">
+            Home
+          </NavLink>
+        </ElementOnTheRight>
+        <ElementOnTheRight>
+          <NavLink activeClassName="active" to="/allproducts">
+            Wszystkie produkty
+          </NavLink>
+        </ElementOnTheRight>
+        <ElementOnTheRight>
+          <NavLink activeClassName="active" to="/additem">
+            Dodaj Produkt
+          </NavLink>
+        </ElementOnTheRight>
+        <ElementOnTheRight>
+          {props.loggedIn ? (
+            <NavLink to="/">
+              <Button onClick={handleLoggedOut}>Wyloguj</Button>
             </NavLink>
-          </ElementOnTheRight>
-          <ElementOnTheRight>
-            <NavLink activeClassName="active" to="/allproducts">
-              Wszystkie produkty
+          ) : (
+            <NavLink to="/login">
+              <Button>Zaloguj</Button>
             </NavLink>
-          </ElementOnTheRight>
-          <ElementOnTheRight>
-            <NavLink activeClassName="active" to="/additem">
-              Dodaj Produkt
-            </NavLink>
-          </ElementOnTheRight>
-          <ElementOnTheRight>
-            {this.state.authUser ? (
-              <NavLink to="/">
-                <Button onClick={this.handleLoggedOut}>Wyloguj</Button>
-              </NavLink>
-            ) : (
-              <NavLink to="/login">
-                <Button>Zaloguj</Button>
-              </NavLink>
-            )}
-          </ElementOnTheRight>
-        </MenuList>
-      </Container>
-    );
-  }
-}
+          )}
+        </ElementOnTheRight>
+      </MenuList>
+    </Container>
+  );
+};
 
-export default withRouter(connect()(Menu));
+const mapStateToProps = ({ loggedIn }) => ({ loggedIn });
+
+const mapDispatchToProps = dispatch => ({
+  isUserLogged: payload => dispatch(isUserLogged(payload)),
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Menu),
+);

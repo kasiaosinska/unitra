@@ -1,19 +1,15 @@
-import { itemsRef } from '../../firebase/firebaseStore';
 export const FETCH_ITEMS = 'fetchItems';
+export const IS_USER_LOGGED = 'isUserLogged';
 
-export const addItem = newItem => async dispatch => {
-  itemsRef.push().set(newItem);
+export const isUserLogged = isLogged => {
+  return {
+    type: IS_USER_LOGGED,
+    isLogged,
+  };
 };
 
-export const removeItem = item => async dispatch => {
-  itemsRef.child(item).remove();
-};
+export const addItem = newItem => async dispatch => {};
 
-export const fetchItems = () => async dispatch => {
-  itemsRef.on('value', snapshot => {
-    dispatch({
-      type: FETCH_ITEMS,
-      payload: snapshot.val(),
-    });
-  });
-};
+export const removeItem = item => async dispatch => {};
+
+export const fetchItems = () => async dispatch => {};
