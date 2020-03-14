@@ -8,9 +8,10 @@ import {
   Input,
   Button,
 } from '../../styled';
-import { setUserSession } from '../../utils/common';
 import { connect } from 'react-redux';
 import { isUserLogged } from '../../store/actions';
+import { post } from '../../api';
+import { setUserSession } from '../../utils/common';
 
 const Login = props => {
   const [login, setLogin] = useState('');
@@ -27,25 +28,12 @@ const Login = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    fetch('http://localhost:7555/users/authenticate', {
-      method: 'POST',
-      body: JSON.stringify({ username: login, password }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => {
-        if (res.status === 200) {
-          props.isUserLogged(true);
-          props.history.push('/additem');
-          return res.json();
-        } else {
-          const error = new Error(res.error);
-          throw error;
-        }
-      })
-      .then(data => {
-        setUserSession(data.token, data.username);
+
+    post('/users/authenticate', JSON.stringify({ username: login, password }))
+      .then(response => {
+        props.isUserLogged(true);
+        setUserSession(response.token, response.username);
+        props.history.push('/additem');
       })
       .catch(err => {
         console.error(err);

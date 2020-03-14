@@ -4,28 +4,19 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import ItemImg from '../../images/item.jpg';
+import ImgPlaceholder from '../../images/photo-placeholder.jpg';
 import { CardImage, CardWrapper, Text } from './styled';
 
-const Item = ({
-  category,
-  name,
-  year,
-  number,
-  description,
-  url,
-  removeItem,
-  isAdmin,
-}) => {
+const Item = ({ category, name, year, number, description, removeItem }) => {
   return (
     <CardWrapper>
-      <CardHeader title={name} />
-      <CardImage image={ItemImg} title="radio" />
+      {name && <CardHeader title={name} />}
+      <CardImage image={ImgPlaceholder} title="radio" />
       <CardContent>
-        <Text component="p">Rodzaj: {category}</Text>
-        <Text component="p">Rok produkcji: {year}</Text>
-        <Text component="p">Numer seryjny: {number}</Text>
-        <Text component="p">{description}</Text>
+        <Text component="p">Rodzaj: {category || ''}</Text>
+        <Text component="p">Rok produkcji: {year || ''}</Text>
+        <Text component="p">Numer seryjny: {number || ''}</Text>
+        <Text component="p">{description || ''}</Text>
         <CardActions>
           <Button variant="contained" color="secondary" onClick={removeItem}>
             Usuń

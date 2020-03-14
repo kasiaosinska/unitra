@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 
 import AddItem from './components/AddItem';

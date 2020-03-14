@@ -4,11 +4,14 @@ import App from './App';
 import store from './store';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
+import ErrorBoundary from './ErrorBoundary';
 
 const app = (
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <ErrorBoundary>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ErrorBoundary>
 );
 
 ReactDOM.render(app, document.getElementById('root'));
