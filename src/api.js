@@ -1,3 +1,7 @@
+export function get(endpoint, body, options) {
+  return request('get', endpoint, body, options);
+}
+
 export function post(endpoint, body, options) {
   return request('post', endpoint, body, options);
 }

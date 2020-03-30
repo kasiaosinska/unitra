@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Button } from '../../styled';
 import {
   Container,
@@ -43,7 +43,7 @@ const Menu = props => {
               <Button onClick={handleLoggedOut}>Wyloguj</Button>
             </NavLink>
           ) : (
-            <NavLink to="/login">
+            <NavLink activeClassName="active" to="/login">
               <Button>Zaloguj</Button>
             </NavLink>
           )}
@@ -59,9 +59,7 @@ const mapDispatchToProps = dispatch => ({
   isUserLogged: payload => dispatch(isUserLogged(payload)),
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(Menu),
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Menu);

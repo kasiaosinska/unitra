@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { removeItem } from '../../store/actions/index';
-
 import Item from '../../containers/Item';
-import Spinner from '../../common/Spinner';
 import { CardsWrapper } from './styled.js';
 
 const AllProducts = props => {
@@ -29,7 +27,7 @@ const AllProducts = props => {
           />
         ))
       ) : (
-        <Spinner />
+        <p>Nie ma żadnych sprzętów</p>
       )}
     </CardsWrapper>
   );

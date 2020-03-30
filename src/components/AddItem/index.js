@@ -10,33 +10,39 @@ import {
 } from '../../styled';
 import { connect } from 'react-redux';
 import { addItem } from '../../store/actions';
+import { post } from '../../api';
+import { withRouter } from 'react-router-dom';
 
 class AddItem extends Component {
+  // TODO add to BE serial number and img
+
   state = {
-    category: '',
+    categoryId: '',
     name: '',
-    year: '',
-    number: '',
+    productionDate: '',
     description: '',
-    img: '',
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
-  onSubmit = e => {
-    e.preventDefault();
+  onSubmit = event => {
+    event.preventDefault();
     this.props.addItem({ ...this.state });
-
-    this.setState({
-      category: '',
-      name: '',
-      year: '',
-      number: '',
-      description: '',
-      img: '',
-    });
+    post('/create', JSON.stringify({ ...this.state }))
+      .then(
+        this.setState({
+          categoryId: '',
+          name: '',
+          productionDate: '',
+          description: '',
+        }),
+      )
+      .catch(err => {
+        console.error(err);
+        this.props.history.push('/login');
+      });
   };
 
   render() {
@@ -46,8 +52,8 @@ class AddItem extends Component {
           <Title>Dodaj przedmiot</Title>
           <Form onSubmit={this.onSubmit}>
             <Select
-              name="category"
-              value={this.state.category}
+              name="categoryId"
+              value={this.state.categoryId}
               onChange={this.onChange}
               placeholder="Kategoria"
             >
@@ -74,8 +80,8 @@ class AddItem extends Component {
             />
             <Input
               type="text"
-              name="year"
-              value={this.state.year}
+              name="productionDate"
+              value={this.state.productionDate}
               onChange={this.onChange}
               placeholder="Rok produkcji"
             />
@@ -106,7 +112,9 @@ const mapDispatchToProps = dispatch => ({
   addItem: payload => dispatch(addItem(payload)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(AddItem);
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps,
+  )(AddItem),
+);

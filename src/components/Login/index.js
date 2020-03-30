@@ -18,21 +18,21 @@ const Login = props => {
   const [password, setPassword] = useState('');
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
-  const handleChangeLogin = e => {
-    setLogin(e.target.value);
+  const handleChangeLogin = event => {
+    setLogin(event.target.value);
   };
 
-  const handleChangePassword = e => {
-    setPassword(e.target.value);
+  const handleChangePassword = event => {
+    setPassword(event.target.value);
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = event => {
+    event.preventDefault();
 
     post('/users/authenticate', JSON.stringify({ username: login, password }))
       .then(response => {
         props.isUserLogged(true);
-        setUserSession(response.token, response.username);
+        setUserSession(response.token);
         props.history.push('/additem');
       })
       .catch(err => {

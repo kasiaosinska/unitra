@@ -19,7 +19,7 @@ const App = props => {
           <Redirect
             to={{
               pathname: '/login',
-              state: { from: props.location },
+              state: { from: props.history },
             }}
           />
         )
