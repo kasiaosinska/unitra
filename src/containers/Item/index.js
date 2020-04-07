@@ -7,22 +7,33 @@ import Button from '@material-ui/core/Button';
 import ImgPlaceholder from '../../images/photo-placeholder.jpg';
 import { CardImage, CardWrapper, Text } from './styled';
 
-const Item = ({ category, name, year, number, description, removeItem }) => {
+const Item = ({
+  category,
+  name,
+  year,
+  number,
+  description,
+  removeItem,
+  url,
+  showRemoveButton,
+}) => {
   return (
     <CardWrapper>
       {name && <CardHeader title={name} />}
-      <CardImage image={ImgPlaceholder} title="radio" />
+      <CardImage image={url || ImgPlaceholder} title="radio" />
       <CardContent>
         <Text component="p">Rodzaj: {category || ''}</Text>
         <Text component="p">Rok produkcji: {year || ''}</Text>
         <Text component="p">Numer seryjny: {number || ''}</Text>
         <Text component="p">{description || ''}</Text>
-        <CardActions>
-          <Button variant="contained" color="secondary" onClick={removeItem}>
-            Usuń
-            <DeleteIcon />
-          </Button>
-        </CardActions>
+        {showRemoveButton && (
+          <CardActions>
+            <Button variant="contained" color="secondary" onClick={removeItem}>
+              Usuń
+              <DeleteIcon />
+            </Button>
+          </CardActions>
+        )}
       </CardContent>
     </CardWrapper>
   );

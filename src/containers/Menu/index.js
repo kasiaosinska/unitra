@@ -21,12 +21,11 @@ const Menu = props => {
   return (
     <Container>
       <MenuList>
-        <ElementOnTheLeft>UNITRA</ElementOnTheLeft>
-        <ElementOnTheRight>
+        <ElementOnTheLeft>
           <NavLink exact activeClassName="active" to="/">
-            Home
+            UNITRA
           </NavLink>
-        </ElementOnTheRight>
+        </ElementOnTheLeft>
         <ElementOnTheRight>
           <NavLink activeClassName="active" to="/allproducts">
             Wszystkie produkty

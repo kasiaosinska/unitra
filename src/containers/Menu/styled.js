@@ -27,6 +27,7 @@ export const ElementOnTheRight = styled.li`
   a {
     font-size: 18px;
     color: #dcdcdc;
+    text-decoration: none;
   }
 `;
 
@@ -35,4 +36,10 @@ export const ElementOnTheLeft = styled.li`
   font-size: 18px;
   color: #dcdcdc;
   text-decoration: none;
+
+  a {
+    font-size: 18px;
+    color: #dcdcdc;
+    text-decoration: none;
+  }
 `;
