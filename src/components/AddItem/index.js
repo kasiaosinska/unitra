@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
-import {
-  Container,
-  Box,
-  Input,
-  Button,
-  Title,
-  Form,
-  Select,
-} from '../../styled';
+import { Container, Box, Input, Button, Title } from '../../styled';
 import { connect } from 'react-redux';
 import { addItem } from '../../store/actions';
 import { post } from '../../api';
 import { withRouter } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import { categories } from '../../mock';
 
 class AddItem extends Component {
-  // TODO add to BE serial number and img
-
   state = {
     categoryId: '',
     name: '',
     productionDate: '',
     description: '',
+    serialNumber: '',
   };
 
   onChange = event => {
@@ -29,14 +24,16 @@ class AddItem extends Component {
 
   onSubmit = event => {
     event.preventDefault();
+    this.setState({ productionDate: new Date(this.state.productionDate) });
     this.props.addItem({ ...this.state });
-    post('/create', JSON.stringify({ ...this.state }))
+    post('/equipment', JSON.stringify({ ...this.state }))
       .then(
         this.setState({
           categoryId: '',
           name: '',
           productionDate: '',
           description: '',
+          serialNumber: '',
         }),
       )
       .catch(err => {
@@ -50,58 +47,64 @@ class AddItem extends Component {
       <Container>
         <Box size="70%">
           <Title>Dodaj przedmiot</Title>
-          <Form onSubmit={this.onSubmit}>
-            <Select
+          <form onSubmit={this.onSubmit}>
+            <TextField
+              id="standard-select-type"
               name="categoryId"
+              select
+              label="Wybierz rodzaj"
               value={this.state.categoryId}
               onChange={this.onChange}
-              placeholder="Kategoria"
+              fullWidth
+              margin="normal"
             >
-              <option>Wybierz</option>
-              <option>Amplituner</option>
-              <option>Gramofon</option>
-              <option>Magnetofon</option>
-              <option>Odtwarzacz CD</option>
-              <option>Radiomagnetofon</option>
-              <option>Radio przenośne</option>
-              <option>Radio stołowe</option>
-              <option>Tuner</option>
-              <option>Wzmacniacz</option>
-              <option>Zestawy głośnikowy</option>
-              <option>Zestawy wieżowy</option>
-              <option>Inne</option>
-            </Select>
-            <Input
-              type="text"
+              {categories.map(option => (
+                <MenuItem key={option.value} value={option.id}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              id="standard-name"
               name="name"
+              label="Nazwa"
               value={this.state.name}
               onChange={this.onChange}
-              placeholder="Nazwa"
+              fullWidth
+              margin="normal"
             />
-            <Input
-              type="text"
+            <TextField
+              id="standard-productionDate"
               name="productionDate"
+              label="Rok produkcji"
               value={this.state.productionDate}
               onChange={this.onChange}
-              placeholder="Rok produkcji"
+              fullWidth
+              margin="normal"
             />
-            <Input
-              type="text"
-              name="number"
-              value={this.state.number}
+            <TextField
+              id="standard-number"
+              name="serialNumber"
+              label="Numer seryjny"
+              value={this.state.serialNumber}
               onChange={this.onChange}
-              placeholder="Numer seryjny"
+              fullWidth
+              margin="normal"
             />
-            <Input
-              type="text"
+            <TextField
+              id="standard-description"
               name="description"
+              label="Opis"
+              multiline
+              rowsMax="2"
               value={this.state.description}
               onChange={this.onChange}
-              placeholder="Opis"
+              fullWidth
+              margin="normal"
             />
             <Input type="file" name="image" placeholder="Dodaj zdjęcie" />
             <Button>Zapisz</Button>
-          </Form>
+          </form>
         </Box>
       </Container>
     );

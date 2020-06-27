@@ -17,6 +17,8 @@ export const CardsWrapper = styled.div`
 `;
 
 export const Text = styled.p`
+  font-size: 18px;
+  color: grey;
   padding: 50px 0;
   text-align: center;
 `;

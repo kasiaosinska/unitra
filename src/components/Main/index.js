@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container } from './styled';
 
-class Main extends Component {
-  render() {
-    return <Container />;
-  }
-}
+const Main = () => <Container />;
 
 export default Main;

@@ -51,27 +51,6 @@ export const Input = styled.input`
   }
 `;
 
-export const Select = styled.select`
-  display: block;
-  background-color: #ecf0f1;
-  border: 2px solid transparent;
-  border-radius: 3px;
-  font-size: 14px;
-  font-weight: 200;
-  font-family: 'Roboto', sans-serif;
-  padding: 10px;
-  width: 100%;
-  transition: border 0.5s;
-  margin: 10px 0;
-  outline: none;
-  height: 43px;
-
-  &:focus {
-    border: 2px solid #a20c0b;
-    box-shadow: none;
-  }
-`;
-
 export const Button = styled.button`
   margin: 10px 0 10px 0;
   cursor: pointer;

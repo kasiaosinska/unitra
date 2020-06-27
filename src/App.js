@@ -6,6 +6,7 @@ import AllProducts from './components/AllProducts';
 import Login from './components/Login';
 import Main from './components/Main';
 import Menu from './containers/Menu';
+import ItemDetails from './components/ItemDetails';
 import { connect } from 'react-redux';
 
 const App = props => {
@@ -34,6 +35,7 @@ const App = props => {
         <Route exact path="/" component={Main} />
         <Route path="/allproducts" component={AllProducts} />
         <Route path="/login" component={Login} />
+        <Route path="/itemdetails" component={ItemDetails} />
         <PrivateRoute path="/additem" component={AddItem} />
       </div>
     </BrowserRouter>

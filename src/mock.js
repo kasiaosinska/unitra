@@ -41,3 +41,18 @@ export const elements = [
     img: '',
   },
 ];
+
+export const categories = [
+  {
+    id: '0',
+    label: 'Amplituner',
+  },
+  {
+    id: '1',
+    label: 'Gramofon',
+  },
+  {
+    id: '2',
+    label: 'Magnetofon',
+  },
+];
